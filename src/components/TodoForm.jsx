@@ -14,7 +14,7 @@ export default function ({ handleSubmit }) {
       <input
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
-        className="border-4 border-gray-500 p-2 w-full rounded-md shadow-md"
+        className="border-4 border-gray-500 p-2 w-full rounded-md shadow-md mb-2"
       />
     </form>
   );

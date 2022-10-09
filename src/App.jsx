@@ -19,7 +19,7 @@ function App() {
   console.log(todos[editTodoId]);
 
   return (
-    <div className="bg-gray-100 mt-10 p-3 w-3/6 m-auto">
+    <div className="bg-gray-100 mt-10 p-3 w-4/6 max-w-lg m-auto">
       <h1>Todo App </h1>
       {editTodoId >= 0 ? (
         <EditTodoForm
@@ -42,6 +42,11 @@ function App() {
         cancelEdit={cancelEdit}
         editTodoId={editTodoId}
       />
+
+      <div className="rounded-md border-2 border-gray-300 p-4">
+        {" "}
+        visibility filters
+      </div>
     </div>
   );
 }

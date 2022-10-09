@@ -1,4 +1,7 @@
 import React from "react";
+import { FcEmptyTrash, FcOk, FcCheckmark, FcCancel } from "react-icons/fc";
+
+import { FaPencilAlt } from "react-icons/fa";
 
 export default function ({
   handleDelete,
@@ -15,35 +18,43 @@ export default function ({
     }
   };
   return (
-    <div className="p-2 flex justify-between items-center bg-gradient-to-b from-green-200 to-green-300  rounded-md m-1">
+    <div className="p-2 flex justify-between items-center bg-gray-700  text-gray-100 rounded-md m-1">
       {children}
-      <div>
-        {editTodoId !== index && (
-          <span
-            className="text-red-500 cursor-pointer text-sm mr-4"
-            onClick={confirmDelete}
-          >
-            delete
-          </span>
-        )}
+      <div className="flex">
         {editTodoId === index && (
           <span
-            className="text-red-500 cursor-pointer text-sm mr-4"
+            className="text-red-500 cursor-pointer text-lg mr-4"
             onClick={cancelEdit}
           >
-            Cancel
+            <FcCheckmark />
           </span>
         )}
         {editTodoId !== index && (
-          <span
-            className="text-cyan-500 cursor-pointer text-sm"
-            onClick={() => {
-              handleEdit(index);
-            }}
-          >
-            edit
-          </span>
-        )}{" "}
+          <div className="flex">
+            <span
+              className="text-red-500 cursor-pointer text-lg mr-4"
+              onClick={confirmDelete}
+            >
+              <FcEmptyTrash />
+            </span>
+            <span
+              className="text-cyan-500 cursor-pointer text-lg mr-4"
+              onClick={() => {
+                handleEdit(index);
+              }}
+            >
+              <FaPencilAlt />
+            </span>
+            <span
+              className="text-cyan-800 cursor-pointer text-lg"
+              onClick={() => {
+                handleComplete(index);
+              }}
+            >
+              <FcOk />
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
