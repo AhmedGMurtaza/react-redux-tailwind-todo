@@ -29,7 +29,11 @@ function App() {
           todo={todos[editTodoId]}
         />
       ) : (
-        <TodoForm handleSubmit={(todo) => dispatch(addTodo(todo))} />
+        <TodoForm
+          handleSubmit={(task) =>
+            dispatch(addTodo({ id: todos.length, task, isCompleted: false }))
+          }
+        />
       )}
       <TodoList
         todos={todos}

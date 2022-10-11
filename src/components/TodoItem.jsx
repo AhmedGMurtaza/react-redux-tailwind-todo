@@ -1,5 +1,7 @@
 import React from "react";
 import { FcEmptyTrash, FcOk, FcCheckmark, FcCancel } from "react-icons/fc";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTodo } from "../store";
 
 import { FaPencilAlt } from "react-icons/fa";
 
@@ -8,9 +10,12 @@ export default function ({
   handleEdit,
   cancelEdit,
   index,
-  children,
   editTodoId,
+  children,
 }) {
+  const { todos, loading } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const confirmDelete = () => {
     let answer = confirm("Are you sure to delete this todo?");
     if (answer) {
@@ -18,7 +23,11 @@ export default function ({
     }
   };
   return (
-    <div className="p-2 flex justify-between items-center bg-gray-700  text-gray-100 rounded-md m-1">
+    <div
+      className={`${
+        todos[index].isCompleted ? "line-through" : ""
+      } p-2 flex justify-between items-center bg-gray-700  text-gray-100 rounded-md m-1`}
+    >
       {children}
       <div className="flex">
         {editTodoId === index && (
@@ -48,10 +57,10 @@ export default function ({
             <span
               className="text-cyan-800 cursor-pointer text-lg"
               onClick={() => {
-                handleComplete(index);
+                dispatch(toggleTodo(index));
               }}
             >
-              <FcOk />
+              {todos[index].isCompleted ? <FcCancel /> : <FcOk />}
             </span>
           </div>
         )}

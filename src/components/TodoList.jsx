@@ -6,7 +6,7 @@ export default function ({ todos, ...props }) {
     <>
       {todos.map((todo, i) => (
         <TodoItem key={i} index={i} {...props}>
-          {todo.task} - {todo.id}
+          {todo.task}
         </TodoItem>
       ))}
     </>
