@@ -4,9 +4,9 @@ import TodoItem from "./TodoItem";
 export default function ({ todos, ...props }) {
   return (
     <>
-      {todos.map((text, i) => (
+      {todos.map((todo, i) => (
         <TodoItem key={i} index={i} {...props}>
-          {text}
+          {todo.task} - {todo.id}
         </TodoItem>
       ))}
     </>

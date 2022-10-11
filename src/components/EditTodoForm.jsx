@@ -1,12 +1,10 @@
 import React, { memo, useEffect, useState } from "react";
 
-function EditTodoForm({ handleSubmit, text }) {
-  const [todo, setTodo] = useState(text);
-
-  console.log("editapp", text);
+function EditTodoForm({ handleSubmit, todo }) {
+  const [text, setText] = useState(todo.task);
 
   useEffect(() => {
-    setTodo(text);
+    setText(text);
   }, [text]);
 
   return (
@@ -14,12 +12,15 @@ function EditTodoForm({ handleSubmit, text }) {
       id="editform"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit(todo);
+        handleSubmit({
+          ...todo,
+          task: text,
+        });
       }}
     >
       <input
-        value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
         className="border-4 border-gray-500 p-2 w-full rounded-md shadow-md"
       />
     </form>

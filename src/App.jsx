@@ -16,19 +16,17 @@ function App() {
     setEditTodoId(-1);
   };
 
-  console.log(todos[editTodoId]);
-
   return (
     <div className="bg-gray-100 mt-10 p-3 w-4/6 max-w-lg m-auto">
       <h1>Todo App </h1>
       {editTodoId >= 0 ? (
         <EditTodoForm
-          handleSubmit={(newVal) => {
-            dispatch(editTodo({ id: editTodoId, text: newVal }));
+          handleSubmit={(newTodo) => {
+            dispatch(editTodo({ id: editTodoId, task: newTodo.task }));
             // reset input box
             setEditTodoId(-1);
           }}
-          text={todos[editTodoId]}
+          todo={todos[editTodoId]}
         />
       ) : (
         <TodoForm handleSubmit={(todo) => dispatch(addTodo(todo))} />

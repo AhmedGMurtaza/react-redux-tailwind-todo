@@ -2,22 +2,28 @@ import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 
 const todoSlice = createSlice({
   name: "todoSlice",
-  initialState: ["first"],
+  initialState: [
+    {
+      task: "first",
+      isCompleted: false,
+      id: 0,
+    },
+  ],
   reducers: {
     addTodo: (state, action) => {
-      console.log("ADD TODO IS CALLED");
-      console.log(action);
-      state.push(action.payload);
+      state.push({
+        task: action.payload.task,
+        isCompleted: false,
+        id: state.length,
+      });
     },
     editTodo: (state, action) => {
-      const newState = [...state];
-      newState[action.payload.id] = action.payload.text;
-      return newState;
+      state[action.payload.id].task = action.payload.task;
+      console.log(state);
     },
     deleteTodo: (state, action) => {
-      console.log("DELETE TODO IS CALLED");
-      return state.filter((todo, i) => {
-        return i !== action.payload;
+      return state.filter((todo) => {
+        return todo.id !== action.payload;
       });
     },
   },
