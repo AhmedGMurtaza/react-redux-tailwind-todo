@@ -1,7 +1,7 @@
 import React from "react";
 import { FcEmptyTrash, FcOk, FcCheckmark, FcCancel } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTodo } from "../store";
+import { toggleTodo } from "../store/todoSlice";
 
 import { FaPencilAlt } from "react-icons/fa";
 
@@ -42,12 +42,14 @@ export default function ({
           <div className="flex">
             <span
               className="text-red-500 cursor-pointer text-lg mr-4"
+              title="Delete"
               onClick={confirmDelete}
             >
               <FcEmptyTrash />
             </span>
             <span
               className="text-cyan-500 cursor-pointer text-lg mr-4"
+              title="Edit"
               onClick={() => {
                 handleEdit(index);
               }}
@@ -56,6 +58,11 @@ export default function ({
             </span>
             <span
               className="text-cyan-800 cursor-pointer text-lg"
+              title={`${
+                todos[index].isCompleted
+                  ? "Toggle to Incomplete"
+                  : "Toggle to Completed"
+              }`}
               onClick={() => {
                 dispatch(toggleTodo(index));
               }}

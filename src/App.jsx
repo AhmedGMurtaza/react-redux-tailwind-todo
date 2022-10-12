@@ -4,7 +4,7 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import EditTodoForm from "./components/EditTodoForm";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, editTodo, deleteTodo } from "./store";
+import { addTodo, editTodo, deleteTodo, toggleTodo } from "./store/todoSlice";
 
 function App() {
   const { todos, loading } = useSelector((state) => state);
@@ -17,8 +17,13 @@ function App() {
   };
 
   return (
-    <div className="bg-gray-100 mt-10 p-3 w-4/6 max-w-lg m-auto">
-      <h1>Todo App </h1>
+    <div className="rounded-xl bg-gray-100 mt-10 p-3 w-4/6 max-w-lg m-auto">
+      <h1
+        className="text-center text-xl mb-2 font-bold text-gray-6
+      00"
+      >
+        Todo App
+      </h1>
       {editTodoId >= 0 ? (
         <EditTodoForm
           handleSubmit={(newTodo) => {
@@ -45,9 +50,22 @@ function App() {
         editTodoId={editTodoId}
       />
 
-      <div className="rounded-md border-2 border-gray-300 p-4">
-        {" "}
-        visibility filters
+      <div className="rounded-md border-2 border-gray-300 p-4 flex justify-between">
+        <h3>visibility filters</h3>
+        <div className="text-sm text-indigo-600 ">
+          <span
+            className="mr-3 pointer"
+            onClick={() => dispatch(toggleTodo("all"))}
+          >
+            All
+          </span>
+          <span
+            className="text-green-700 pointer"
+            onClick={() => dispatch(toggleTodo("completed"))}
+          >
+            Completed
+          </span>
+        </div>
       </div>
     </div>
   );
