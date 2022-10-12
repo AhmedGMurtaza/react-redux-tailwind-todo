@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import TodoFooter from "./components/TodoFooter";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import EditTodoForm from "./components/EditTodoForm";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo, editTodo, deleteTodo } from "./store/todoSlice";
-import { FiCheck } from "react-icons/fi";
-
-const COMPLETED = "COMPLETED";
-const PENDING = "PENDING";
-const ALL = "ALL";
+import VisibilityFilter from "./components/VisibilityFilter";
+import { COMPLETED, PENDING, ALL } from "./constants";
 
 function App() {
   const { todos, loading } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [editTodoId, setEditTodoId] = useState(-1);
-  const [visibility, setVisibility] = useState("ALL");
+  const [visibility, setVisibility] = useState(ALL);
 
   const cancelEdit = () => {
     setEditTodoId(-1);
@@ -45,51 +41,20 @@ function App() {
         />
       )}
       <TodoList
-        todos={todos.filter((todo) => {
-          if (visibility === COMPLETED) {
-            return todo.isCompleted ? todo : null;
-          } else if (visibility === PENDING) {
-            return !todo.isCompleted ? todo : null;
-          }
-          return todo;
-        })}
+        todos={todos}
         handleDelete={(index) => dispatch(deleteTodo(index))}
-        handleEdit={(index) => {
+        enableEdit={(index) => {
           setEditTodoId(index);
         }}
         cancelEdit={cancelEdit}
         editTodoId={editTodoId}
+        visibility={visibility}
       />
 
-      <div className="rounded-md border-2 border-gray-300 p-4 flex flex-col text-center">
-        <h3 className="text-md uppercase ">Visibility filters</h3>
-        <div className="text-md text-indigo-600 w-full flex justify-center space-around mt-2">
-          <span
-            className={`${
-              visibility === ALL ? "" : "line-through"
-            } mr-3 cursor-pointer`}
-            onClick={() => setVisibility(ALL)}
-          >
-            All
-          </span>
-          <span
-            className={`${
-              visibility === PENDING ? "" : "line-through"
-            } text-orange-500 mr-3 cursor-pointer`}
-            onClick={() => setVisibility(PENDING)}
-          >
-            Pending
-          </span>
-          <span
-            className={`${
-              visibility === COMPLETED ? "" : "line-through"
-            } text-green-700 mr-3 cursor-pointer  flex items-center `}
-            onClick={() => setVisibility(COMPLETED)}
-          >
-            Completed
-          </span>
-        </div>
-      </div>
+      <VisibilityFilter
+        visibility={visibility}
+        handleVisibility={setVisibility}
+      />
     </div>
   );
 }

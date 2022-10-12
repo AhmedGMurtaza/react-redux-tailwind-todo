@@ -5,13 +5,7 @@ import { toggleTodo } from "../store/todoSlice";
 
 import { FaPencilAlt } from "react-icons/fa";
 
-export default function ({
-  handleDelete,
-  handleEdit,
-  index,
-  editTodoId,
-  children,
-}) {
+export default function ({ handleDelete, enableEdit, index, editTodoId }) {
   const { todos, loading } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -28,7 +22,7 @@ export default function ({
         editTodoId === index ? "bg-red-200" : "bg-gray-200"
       } flex justify-between items-center  rounded-lg h-full  px-2 py-4 m-1 border-b  border-gray-200`}
     >
-      {children}
+      {todos[index].task}
       <div className="flex">
         <div className="flex">
           <span
@@ -42,7 +36,7 @@ export default function ({
             className="text-cyan-500 cursor-pointer text-lg mr-4"
             title="Edit"
             onClick={() => {
-              handleEdit(index);
+              enableEdit(index);
             }}
           >
             <FaPencilAlt />
@@ -52,7 +46,7 @@ export default function ({
             title={`${
               todos[index].isCompleted
                 ? "Toggle to Incomplete"
-                : "Toggle to Completed"
+                : "Toggle to Complete"
             }`}
             onClick={() => {
               dispatch(toggleTodo(index));
