@@ -3,13 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // TODO SLICE (reducer, action creators)
 const todoSlice = createSlice({
   name: "todos",
-  initialState: [
-    {
-      task: "first",
-      isCompleted: true,
-      id: 0,
-    },
-  ],
+  initialState: [],
   reducers: {
     // addtodo is customized reducer
     addTodo: (state, action) => {
