@@ -1,11 +1,3 @@
-# React Redux Toolkit Todo
-
-All the project roadmap provided here with priority:
-
-# React Redux Toolkit Todo
-
-All the project roadmap provided here with priority:
-
 ### React Redux Toolkit Todo
 
 All the project tasks mentioned below with priority:
