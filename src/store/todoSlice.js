@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// TODO SLICE (reducer, action creators)
 const todoSlice = createSlice({
   name: "todos",
   initialState: [
@@ -17,19 +18,6 @@ const todoSlice = createSlice({
         isCompleted: false,
         id: state.length,
       });
-      //   reducer: (state, action) => {
-      //     //this payload was customized in below prepaervv
-      //     state.push(action.payload);
-      //   },
-      //   prepare: (task) => {
-      //     return {
-      //       payload: {
-      //         task,
-      //         isCompleted: false,
-      //         id: state.length,
-      //       },
-      //     };
-      //   },
     },
     editTodo: (state, action) => {
       state[action.payload.id].task = action.payload.task;

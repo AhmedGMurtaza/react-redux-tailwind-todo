@@ -26,7 +26,7 @@ export default function ({
     <div
       className={`${
         todos[index].isCompleted ? "line-through" : ""
-      } p-2 flex justify-between items-center bg-gray-700  text-gray-100 rounded-md m-1`}
+      }  flex justify-between items-center  rounded-lg h-full bg-gray-200 px-2 py-4 m-1 border-b  border-gray-200`}
     >
       {children}
       <div className="flex">
