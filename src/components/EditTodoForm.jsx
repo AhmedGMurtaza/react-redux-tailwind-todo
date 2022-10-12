@@ -12,10 +12,12 @@ function EditTodoForm({ handleSubmit, todo }) {
       id="editform"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit({
-          ...todo,
-          task: text,
-        });
+        if (text.length > 0) {
+          handleSubmit({
+            ...todo,
+            task: text,
+          });
+        }
       }}
     >
       <input
